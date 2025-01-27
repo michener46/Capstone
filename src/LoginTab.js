@@ -7,8 +7,14 @@ function LoginTab() {
 
   const handleLogin = () => {
     // For now, just print the credentials to the console
-    console.log('Username:', username);
-    console.log('Password:', password);
+    fetch('http://127.0.0.1:5000/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify({'username': username, 'password': password})
+    })
+    .then(respose => respose.json())
+    .then(data => console.log(data))
+    .catch(error => console.log("Error: ", error));
   };
 
   return (
